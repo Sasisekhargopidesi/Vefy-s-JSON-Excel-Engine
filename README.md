@@ -1,10 +1,6 @@
-To make your README look more professional and corporate-ready, we can replace the playful emojis with **Markdown badges** and **standardized Font-Awesome-style icons** (using text-based icons or HTML tags). This gives the project an "Enterprise SaaS" feel rather than a student project.
 
-Here is your updated, polished **README.md** content:
 
----
-
-# Vefy | Financial Data Automation Engine
+# Vefy | JSON file  to Excel file
 
 **Vefy** is a sophisticated fintech automation platform designed to transform complex, multi-layered financial data into structured, actionable insights. By bridging the gap between raw JSON data and human-readable Excel workbooks, Vefy empowers smarter financial decision-making with an AI-first approach.
 
@@ -270,4 +266,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
 
