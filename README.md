@@ -108,13 +108,20 @@ The Vefy frontend is designed for trust and efficiency, featuring a "Fintech Nav
 
 Users are greeted with a suite of automation utilities, emphasizing Vefy's role as a complete financial decision-making hub.
 
+<p align="center">
+  <img src="assets/dashboard.png" alt="Vefy Tool Selection Dashboard" width="800">
+</p>
+
 ### 2. The Converter Interface
 
-The dedicated conversion page features a sleek, interactive dropzone.
+The dedicated conversion page features a sleek, interactive dropzone. 
 
 * **User Experience:** Real-time feedback showing "File Ready" and the exact size (e.g., **2.04 MB**) of the selected document.
 * **Safety Prompts:** Clear indicators of supported formats and size constraints.
 
+<p align="center">
+  <img src="assets/converter.png" alt="Vefy JSON to Excel Converter Interface" width="800">
+</p>
 ---
 
 ## 🛠️ Technical Stack
@@ -266,5 +273,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
 
 
