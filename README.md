@@ -120,9 +120,10 @@ The dedicated conversion page features a sleek, interactive dropzone.
 * **Safety Prompts:** Clear indicators of supported formats and size constraints.
 
 <p align="center">
-  <img src="assets/converter.png" alt="Vefy JSON to Excel Converter Interface" width="800">
+  <video src="assets/Vefy's_Project_overview.mp4" width="800" controls>
+    Your browser does not support the video tag.
+  </video>
 </p>
----
 
 ## 🛠️ Technical Stack
 
@@ -273,6 +274,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
 
 
 
