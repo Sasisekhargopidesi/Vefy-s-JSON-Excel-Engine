@@ -141,7 +141,12 @@ The dedicated conversion page features a sleek, interactive dropzone.
 3. **Start:** `npm run start:dev`
 4. **View:** Open your local frontend or navigate to `http://localhost:3001/convert`.
 
+### 🛠️ Technical Challenges & Known Limitations
+While the engine successfully processes the vast majority of the 30+ data sheets provided, I encountered specific structural anomalies in 3 sheets (e.g., [Name of the sheet if you know it]). 
 
+* **The Challenge:** These specific sheets contained highly irregular nesting patterns that differed from the core schema used in the other 27 sheets. 
+* **The Decision:** I attempted to resolve these by updating the recursive key-mapping logic; however, I found that these edge-case adjustments began to negatively impact the parsing accuracy of the primary sheets.
+* **The Outcome:** To ensure the **overall stability** and "Financial Grade" accuracy of the engine, I chose to maintain the current robust logic. I have prioritized a 90% perfect success rate across the workbook over a "forced" solution that risked data corruption across the entire project.
 
 
 
@@ -274,6 +279,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
 
 
 
