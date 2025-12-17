@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vefy - Financial Automation Hub</title>
+    <style>
+        /* --- 1. Branding and Global Styles (UPDATED FOR RESPONSIVENESS) --- */
+        :root {
+            --primary-navy: #0A2540; /* Fintech Deep Navy */
+            --accent-cyan: #00D4FF;   /* AI Electric Blue */
+            --bg-light: #F7F9FC;      /* Trustworthy Light Grey */
+            --bg-dark-card: #182235;  /* Dark card background */
+            --text-dark: #1A1F2C;
+            --text-grey: #64748B;
+            --interactive-light: #CCF3FF; /* Very light cyan for interactive backgrounds */
+        }
+
+        /* Global Box-Sizing for Responsiveness */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+            /* Subtle body gradient added for overall aesthetic */
+            background: linear-gradient(to bottom, #fefefe, var(--bg-light));
+        }
+
+        /* --- 2. Header and Navigation --- */
+        nav {
+            width: 100%;
+            padding: 15px 40px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .logo-sphere {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, var(--primary-navy) 100%);
+            box-shadow: 0 0 5px var(--accent-cyan);
+        }
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            letter-spacing: -0.5px;
+        }
+
+        /* Navigation List Styling */
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-cyan);
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* UPDATED: 'Back to Tools' Notification Style */
+        .back-link {
+            font-size: 14px;
+            text-decoration: none;
+            display: none;
+            transition: all 0.2s;
+            color: white; /* White text */
+            background-color: var(--primary-navy); /* Navy background */
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .back-link:hover {
+            background-color: var(--accent-cyan); /* Cyan on hover */
+            color: var(--primary-navy); /* Navy text on cyan */
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 212, 255, 0.4);
+        }
+
+        /* --- 3. Page Container --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- INTERFACE 1 STYLES --- */
+
+        #main-dashboard {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            width: 100%;
+            /* Interactive Gradient Background for this specific section */
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--interactive-light) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 38px;
+            color: var(--primary-navy);
+            margin-bottom: 5px;
+        }
+        .section-header p {
+            color: var(--text-grey);
+            font-size: 18px;
+        }
+        .highlight-tag {
+            display: inline-block;
+            background-color: #E0F7FA;
+            color: var(--accent-cyan);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        /* Hero Text Styles */
+        .hero-main {
+            text-align: center;
+            padding: 0 100px 80px 100px;
+        }
+        .hero-main h1 {
+            font-size: 56px;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            color: var(--primary-navy);
+        }
+        .hero-main h1 span {
+            color: var(--accent-cyan); 
+            text-shadow: 1px 1px 10px rgba(0, 212, 255, 0.5); 
+        }
+        .hero-main p {
+            color: var(--primary-navy); 
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Tool Cards Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        .tool-card {
+            background: white; 
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
+        }
+        .tool-card.dark {
+            background: var(--bg-dark-card);
+            color: white;
+            border-color: var(--bg-dark-card);
+        }
+        
+        .tool-icon-small {
+            color: var(--accent-cyan);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .tool-card.dark .tool-icon-small {
+            color: white;
+        }
+
+        .tool-card h3 {
+            font-size: 24px; 
+            font-weight: 700; 
+            color: var(--primary-navy);
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .tool-card.dark h3 {
+            color: white;
+        }
+        .tool-card p {
+            color: var(--text-grey);
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        .tool-card.dark p {
+            color: #C8D8E0;
+        }
+        .tool-action {
+            color: var(--primary-navy);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.2s;
+        }
+        .tool-card:hover .tool-action {
+            color: var(--accent-cyan);
+        }
+        .tool-card.dark .tool-action {
+            color: var(--accent-cyan);
+        }
+        .tool-card.dark:hover .tool-action {
+            color: white;
+        }
+        .coming-soon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #FFECB3;
+            color: #FFA000;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* What We Do Section */
+        .what-we-do-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        .do-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-cyan);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .do-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .do-icon {
+            width: 28px;
+            height: 28px;
+            color: var(--primary-navy);
+            fill: var(--primary-navy);
+            stroke: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+        .do-card h4 {
+            font-size: 20px;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            color: var(--primary-navy);
+        }
+        .do-card p {
+            font-size: 14px;
+            color: var(--text-grey);
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us-section {
+            background: var(--primary-navy);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .why-left h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .why-left p {
+            color: #C8D8E0;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .why-list {
+            list-style: none;
+            padding: 0;
+        }
+        .why-list li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .why-list li::before {
+            content: '✓';
+            color: var(--accent-cyan);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .why-right {
+            background: var(--bg-dark-card);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .metric-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .metric-table th, .metric-table td {
+            padding: 15px 0;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .metric-table th {
+            color: #C8D8E0;
+            font-weight: 400;
+        }
+        .metric-table td {
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-align: right;
+        }
+
+
+        /* --- INTERFACE 2 STYLES (JSON CONVERTER) --- */
+        #json-converter {
+            display: none;
+            background-color: var(--bg-light);
+            padding-top: 50px;
+            padding-bottom: 50px;
+            width: 100%; 
+        }
+
+        /* Hero text for the Converter */
+        .hero-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero-text h1 {
+            font-size: 32px;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+        .hero-text p {
+            font-size: 16px;
+            color: var(--text-grey);
+        }
+
+        #json-converter #conversion-form {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+        }
+        
+        .drop-zone {
+            border: 2px dashed var(--accent-cyan);
+            border-radius: 10px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            background-color: #FAFCFF;
+            position: relative;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            background-color: #E0F7FA;
+            border-color: var(--primary-navy);
+        }
+        .drop-zone-icon {
+            margin-bottom: 15px;
+        }
+        .drop-zone-text {
+            font-weight: 500;
+            color: var(--primary-navy);
+        }
+        .hidden-file-input {
+            display: none;
+        }
+
+        #submit-button {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, opacity 0.3s;
+            width: 100%;
+        }
+        #submit-button:hover:not(:disabled) {
+            background-color: var(--accent-cyan);
+            color: var(--primary-navy);
+        }
+        #submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+
+        /* Footer styling kept generic for both interfaces */
+        footer {
+            width: 100%;
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            margin-top: auto; 
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+        .footer-grid h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 8px;
+        }
+        .footer-grid ul {
+            list-style: none;
+            padding: 0;
+            font-size: 14px;
+        }
+        .footer-grid ul li {
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .footer-grid ul li:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* --- 8. Responsiveness (Ensuring screen fit) --- */
+        @media (max-width: 1050px) {
+            nav {
+                padding: 15px 20px; /* Reduced side padding */
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .hero-main {
+                padding: 0 50px 80px 50px; /* Reduced hero padding */
+            }
+        }
+        @media (max-width: 850px) {
+            .nav-links {
+                display: none; /* Hide main links on smaller screens */
+            }
+            .why-choose-us-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-main {
+                padding: 0 20px 50px 20px;
+            }
+            .hero-main h1 {
+                font-size: 36px;
+            }
+            .why-choose-us-section {
+                padding: 40px 20px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand-wrapper" id="logo-home">
+            <div class="logo-sphere"></div>
+            <span class="brand-name">Vefy</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#services-section">Services</a></li>
+            <li><a href="#solutions-section">Solutions</a></li>
+            <li><a href="#activities-section">Activities</a></li>
+            <li><a href="#about-us-section">About Us</a></li>
+        </ul>
+
+        <a href="#" class="back-link" id="back-to-tools-link">← Back to Tools</a>
+    </nav>
+
+    <div id="main-dashboard">
+        <div class="container">
+            <div class="hero-main">
+                <span class="highlight-tag">Intelligent Financial Automation</span>
+                <h1>Powering Smarter Financial Decisions with <span style="color: var(--accent-cyan); text-shadow: none;">AI</span></h1>
+                <p>
+                    Faster credit decisions • AI-driven portfolio intelligence • Financial data automation
+                </p>
+            </div>
+
+            <div class="section-header">
+                <h2>Select a Tool</h2>
+                <p>Choose from our suite of financial automation utilities</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" id="json-tool-card">
+                    <div class="tool-icon-small">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-bar-chart"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="17" x2="12" y2="10"></line><line x1="8" y1="17" x2="8" y2="14"></line><line x1="16" y1="17" x2="16" y2="13"></line></svg>
+                    </div>
+                    <div>
+                        <h3>JSON to Excel Converter</h3>
+                        <p>Instantly convert complex JSON data structures into formatted Excel workbooks.</p>
+                    </div>
+                    <a href="#" class="tool-action">Launch Tool →</a>
+                </div>
+
+                <div class="tool-card">
+                    <span class="coming-soon">COMING SOON</span>
+                    <div class="tool-icon-small" style="color: var(--text-grey);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hard-drive"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="18" y1="16" x2="18.01" y2="16"></line></svg>
+                    </div>
+                    <div>
+                        <h3>Large JSON Streaming</h3>
+                        <p>Optimized pipeline for processing enterprise-scale datasets (GBs) without memory overhead.</p>
+                    </div>
+                    <a href="#" class="tool-action">Join Waitlist →</a>
+                </div>
+
+                <div class="tool-card dark">
+                    <div class="tool-icon-small" style="color: white;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <div>
+                        <h3>Visit Our Company</h3>
+                        <p>Explore our full suite of AI-driven financial solutions and enterprise services.</p>
+                    </div>
+                    <a href="#" class="tool-action">Go to Website →</a>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2 id="services-section" style="border-bottom: 3px solid var(--accent-cyan); padding-bottom: 10px; display: inline-block;">
+                    What We Do
+                </h2>
+            </div>
+            <div class="what-we-do-grid">
+                <div class="do-card">
+                    <svg class="do-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line><line x1="7" y1="15" x2="7.01" y2="15"></line><line x1="11" y1="15" x2="13" y2="15"></line></svg>
+                    <h4>Credit Intelligence</h4>
+                    <p>AI-powered algorithms for faster, smarter credit decisioning workflows.</p>
+                </div>
+                <div class="do-card">
+                    <svg class="do-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3V21H21"></path><path d="M7 13L11 9L15 13L20 8"></path></svg>
+                    <h4>Portfolio Monitoring</h4>
+                    <p>Real-time portfolio tracking using advanced machine learning models.</p>
+                </div>
+                <div class="do-card">
+                    <svg class="do-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <h4>Risk Automation</h4>
+                    <p>Automated compliance checks and risk assessment pipelines.</p>
+                </div>
+                <div class="do-card">
+                    <svg class="do-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 16 12 8 21 16 12 24 3 16"></polygon><polygon points="3 8 12 0 21 8 12 16 3 8"></polygon></svg>
+                    <h4>Data Transformation</h4>
+                    <p>Seamlessly convert complex financial data into usable formats.</p>
+                </div>
+            </div>
+
+            <div class="why-choose-us-section" id="about-us-section">
+                <div class="why-left">
+                    <h2>Why Choose Us?</h2>
+                    <p>We combine enterprise-grade security with cutting-edge AI architecture to deliver speed and reliability.</p>
+                    <ul class="why-list">
+                        <li>Lightning Fast Processing</li>
+                        <li>Bank-Grade Security</li>
+                        <li>Enterprise Ready Architecture</li>
+                        <li>AI-First Approach</li>
+                    </ul>
+                </div>
+                <div class="why-right">
+                    <table class="metric-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Performance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Processing Speed</td>
+                                <td>0.45s</td>
+                            </tr>
+                            <tr>
+                                <td>Accuracy</td>
+                                <td>99.9%</td>
+                            </tr>
+                            <tr>
+                                <td>Uptime</td>
+                                <td>99.99%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="json-converter">
+        <div class="container">
+            <div class="hero-text">
+                <h1>JSON to Excel Converter</h1>
+                <p>Upload your JSON file to generate a formatted Excel workbook.</p>
+            </div>
+
+            <form id="conversion-form" action="http://localhost:3001/convert/json-to-excel" method="POST" enctype="multipart/form-data">
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-icon" style="opacity:1;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    </div>
+                    <div class="drop-zone-text" id="drop-zone-text" style="margin-bottom: 5px; font-size: 16px;">
+                        Click to browse or drag file
+                    </div>
+                    <p style="color: var(--text-grey); font-size: 12px; margin: 0;">Supported format: .json (Max 5MB)</p>
+                    
+                    <input type="file" name="file" id="file-input" class="hidden-file-input" accept=".json">
+                </div>
+
+                <p id="file-status-message" style="color: var(--text-grey); font-size: 14px; margin-top: 5px;">No file selected.</p>
+
+                <button type="submit" id="submit-button" disabled>
+                    Upload & Download Excel File
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>About Vefy</h4>
+                <ul>
+                    <li>Our Mission</li>
+                    <li>Careers</li>
+                    <li>Press & Media</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Security & Compliance</h4>
+                <ul>
+                    <li>SOC2 Type II Report</li>
+                    <li>Terms of Service</li>
+                    <li>Privacy Policy</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li>Documentation (API)</li>
+                    <li>FAQ Center</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navigation Logic ---
+        const mainDashboard = document.getElementById('main-dashboard');
+        const jsonConverter = document.getElementById('json-converter');
+        const jsonToolCard = document.getElementById('json-tool-card');
+        const backLink = document.getElementById('back-to-tools-link');
+        const logoHome = document.getElementById('logo-home');
+
+        function navigate(target) {
+            if (target === 'converter') {
+                mainDashboard.style.display = 'none';
+                jsonConverter.style.display = 'block';
+                backLink.style.display = 'inline-block';
+            } else { // 'dashboard'
+                jsonConverter.style.display = 'none';
+                mainDashboard.style.display = 'block';
+                backLink.style.display = 'none';
+            }
+        }
+
+        jsonToolCard.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigate('converter');
+            window.scrollTo(0, 0); 
+        });
+
+        logoHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigate('dashboard');
+            window.scrollTo(0, 0); 
+        });
+
+        backLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigate('dashboard');
+            window.scrollTo(0, 0); 
+        });
+
+        // --- Interface 2 (JSON Converter) Logic ---
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const dropZoneText = document.getElementById('drop-zone-text');
+        const fileStatusMessage = document.getElementById('file-status-message');
+        const submitButton = document.getElementById('submit-button');
+        const form = document.getElementById('conversion-form');
+
+        function updateFileStatus(file) {
+            if (file) {
+                fileStatusMessage.textContent = `File selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                submitButton.disabled = false;
+                dropZoneText.innerHTML = 'File Ready: **Click Upload** to convert.';
+                dropZone.classList.remove('dragover');
+            } else {
+                fileStatusMessage.textContent = 'No file selected.';
+                submitButton.disabled = true;
+                dropZoneText.innerHTML = 'Click to browse or drag file';
+            }
+        }
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            updateFileStatus(e.target.files[0]);
+        });
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                fileInput.files = files; 
+                updateFileStatus(files[0]);
+            }
+        }, false);
+
+        form.addEventListener('submit', () => {
+             submitButton.textContent = 'Processing... Please wait.';
+             submitButton.disabled = true;
+        });
+
+        // Initial state load
+        navigate('dashboard');
+        updateFileStatus(null); 
+    </script>
+</body>
+</html>
